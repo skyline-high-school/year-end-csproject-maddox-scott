@@ -206,6 +206,22 @@ public class GameState {
         return moves;
     }
 
+    public GameState[] getMoves(char symbol) {
+        GameState[] moves = new GameState[movesLeft()];
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == '-') {
+                    char[][] tempBoard = board.clone();
+                    tempBoard[i][j] = symbol;
+                    moves[counter] = new GameState(size, tempBoard);
+                    counter++;
+                }
+            }
+        }
+        return moves;
+    }
+
     public void printBoard() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
