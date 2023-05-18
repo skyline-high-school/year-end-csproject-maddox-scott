@@ -1,4 +1,8 @@
 public class AI {
+    GameState returnMove(GameState state) {
+        return (GameState)minValue(state)[0];
+    }
+
     Object[] maxValue(GameState state) {
         Object[] output = new Object[2];
         output[1] = Integer.MIN_VALUE;

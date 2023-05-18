@@ -18,86 +18,8 @@ public class GameState {
     }
 
     public boolean isTerminalState() {
-        // Check for p1 win.
-        for (int i = 0; i < size; i++) {
-            boolean onlyX = true;
-            for (int j = 0; i < size; j++) {
-                if (board[i][j] == '-' || board[i][j] == 'O') {
-                    onlyX = false;
-                }
-            }
-            if (onlyX) {
-                return true;
-            }
-        }
-        for (int i = 0; i < size; i++) {
-            boolean onlyX = true;
-            for (int j = 0; i < size; j++) {
-                if (board[j][i] == '-' || board[j][i] == 'O') {
-                    onlyX = false;
-                }
-            }
-            if (onlyX) {
-                return true;
-            }
-        }
-        boolean onlyX = true;
-        for (int i = 0; i < size; i++) {
-            if (board[i][i] == '-' || board[i][i] == 'O') {
-                onlyX = false;
-            }
-        }
-        if (onlyX) {
-            return true;
-        }
-        onlyX = true;
-        for (int i = 0; i < size; i++) {
-            if (board[i][size - 1 - i] == '-' || board[i][size - 1 - i] == 'O') {
-                onlyX = false;
-            }
-        }
-        if (onlyX) {
-            return true;
-        }
-        // Check for p2 win.
-        for (int i = 0; i < size; i++) {
-            boolean onlyO = true;
-            for (int j = 0; i < size; j++) {
-                if (board[i][j] == '-' || board[i][j] == 'X') {
-                    onlyO = false;
-                }
-            }
-            if (onlyO) {
-                return true;
-            }
-        }
-        for (int i = 0; i < size; i++) {
-            boolean onlyO = true;
-            for (int j = 0; i < size; j++) {
-                if (board[j][i] == '-' || board[j][i] == 'X') {
-                    onlyO = false;
-                }
-            }
-            if (onlyO) {
-                return true;
-            }
-        }
-        boolean onlyO = true;
-        for (int i = 0; i < size; i++) {
-            if (board[i][i] == '-' || board[i][i] == 'X') {
-                onlyO = false;
-            }
-        }
-        if (onlyO) {
-            return true;
-        }
-        onlyO = true;
-        for (int i = 0; i < size; i++) {
-            if (board[i][size - 1 - i] == '-' || board[i][size - 1 - i] == 'X') {
-                onlyO = false;
-            }
-        }
-        if (onlyO) {
+        // Check for winner.
+        if (value() != 0) {
             return true;
         }
         // Check for more moves.
@@ -229,5 +151,13 @@ public class GameState {
             }
             System.out.println();
         }
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public char[][] getBoard() {
+        return board;
     }
 }
