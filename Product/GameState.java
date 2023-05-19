@@ -134,7 +134,12 @@ public class GameState {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (board[i][j] == '-') {
-                    char[][] tempBoard = board.clone();
+                    char[][] tempBoard = new char[size][size];
+                    for (int a = 0; a < size; a++) {
+                        for (int b = 0; b < size; b++) {
+                            tempBoard[a][b] = board[a][b];
+                        }
+                    }
                     tempBoard[i][j] = symbol;
                     moves[counter] = new GameState(size, tempBoard);
                     counter++;

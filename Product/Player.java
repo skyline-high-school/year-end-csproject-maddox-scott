@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Player {
-    static GameState returnMove(GameState state) {
+    static GameState returnMove(GameState state, Scanner input) {
+        System.out.println("Player 1\'s Turn");
         GameState move = null;
-        Scanner input = new Scanner (System.in);
         int row, col;
         boolean validCoordinate = false;
         while (!validCoordinate) {
@@ -12,6 +12,7 @@ public class Player {
                 System.out.print("Which row will you capture?: ");
                 if (input.hasNextInt()) {
                     row = input.nextInt();
+                    input.nextLine();
                     if (row >= 0 && row < state.getSize()) {
                         break;
                     } else {
@@ -19,7 +20,7 @@ public class Player {
                         input.nextLine();
                     }
                 } else {
-                    System.out.println("Invalid input: Please select an integer value between 0 and " + (state.getSize() - 1) + ".");
+                    System.out.println("Invalid input: Please select an integer value.");
                     input.nextLine();
                 }
             }
@@ -28,6 +29,7 @@ public class Player {
                 System.out.print("Which column will you capture?: ");
                 if (input.hasNextInt()) {
                     col = input.nextInt();
+                    input.nextLine();
                     if (col >= 0 && col < state.getSize()) {
                         break;
                     } else {
@@ -48,7 +50,6 @@ public class Player {
                 System.out.println("Invalid Coordinate: this coordinate has already been captured.");
             }
         }
-        input.close();
         return move;
     }
 }

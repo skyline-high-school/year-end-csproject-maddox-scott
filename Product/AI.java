@@ -1,37 +1,47 @@
 public class AI {
     static GameState returnMove(GameState state) {
-        return (GameState)minValue(state)[0];
+        return (GameState)minValueAB(state, Integer.MIN_VALUE, Integer.MAX_VALUE)[0];
     }
 
-    static Object[] maxValue(GameState state) {
+    static Object[] maxValueAB(GameState state, int alpha, int beta) {
         Object[] output = new Object[2];
+        output[0] = null;
         output[1] = Integer.MIN_VALUE;
         if (state.isTerminalState()) {
             output[1] = state.value();
             return output;
         }
         for (GameState successorState : state.getMoves('X')) {
-            int successorEval = (Integer)minValue(successorState)[1];
+            int successorEval = (Integer)minValueAB(successorState, alpha, beta)[1];
             if (successorEval > (Integer)output[1]) {
                 output[0] = successorState;
                 output[1] = successorEval;
+            }
+            alpha = Integer.max(alpha, successorEval);
+            if (alpha >= beta) {
+                break;
             }
         }
         return output;
     }
 
-    static Object[] minValue(GameState state) {
+    static Object[] minValueAB(GameState state, int alpha, int beta) {
         Object[] output = new Object[2];
+        output[0] = null;
         output[1] = Integer.MAX_VALUE;
         if (state.isTerminalState()) {
             output[1] = state.value();
             return output;
         }
         for (GameState successorState : state.getMoves('O')) {
-            int successorEval = (Integer)maxValue(successorState)[1];
+            int successorEval = (Integer)maxValueAB(successorState, alpha, beta)[1];
             if (successorEval < (Integer)output[1]) {
                 output[0] = successorState;
                 output[1] = successorEval;
+            }
+            beta = Integer.min(beta, successorEval);
+            if (alpha >= beta) {
+                break;
             }
         }
         return output;
