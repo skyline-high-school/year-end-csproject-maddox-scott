@@ -1,9 +1,9 @@
 public class AI {
-    GameState returnMove(GameState state) {
+    static GameState returnMove(GameState state) {
         return (GameState)minValue(state)[0];
     }
 
-    Object[] maxValue(GameState state) {
+    static Object[] maxValue(GameState state) {
         Object[] output = new Object[2];
         output[1] = Integer.MIN_VALUE;
         if (state.isTerminalState()) {
@@ -20,7 +20,7 @@ public class AI {
         return output;
     }
 
-    Object[] minValue(GameState state) {
+    static Object[] minValue(GameState state) {
         Object[] output = new Object[2];
         output[1] = Integer.MAX_VALUE;
         if (state.isTerminalState()) {

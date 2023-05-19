@@ -34,7 +34,7 @@ public class GameState {
         // Check for p1 win.
         for (int i = 0; i < size; i++) {
             boolean onlyX = true;
-            for (int j = 0; i < size; j++) {
+            for (int j = 0; j < size; j++) {
                 if (board[i][j] == '-' || board[i][j] == 'O') {
                     onlyX = false;
                 }
@@ -45,7 +45,7 @@ public class GameState {
         }
         for (int i = 0; i < size; i++) {
             boolean onlyX = true;
-            for (int j = 0; i < size; j++) {
+            for (int j = 0; j < size; j++) {
                 if (board[j][i] == '-' || board[j][i] == 'O') {
                     onlyX = false;
                 }
@@ -75,7 +75,7 @@ public class GameState {
         // Check for p2 win.
         for (int i = 0; i < size; i++) {
             boolean onlyO = true;
-            for (int j = 0; i < size; j++) {
+            for (int j = 0; j < size; j++) {
                 if (board[i][j] == '-' || board[i][j] == 'X') {
                     onlyO = false;
                 }
@@ -86,7 +86,7 @@ public class GameState {
         }
         for (int i = 0; i < size; i++) {
             boolean onlyO = true;
-            for (int j = 0; i < size; j++) {
+            for (int j = 0; j < size; j++) {
                 if (board[j][i] == '-' || board[j][i] == 'X') {
                     onlyO = false;
                 }
@@ -147,7 +147,7 @@ public class GameState {
     public void printBoard() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                System.out.print(board[i][j] + ' ');
+                System.out.print(" " + board[i][j] + " ");
             }
             System.out.println();
         }
