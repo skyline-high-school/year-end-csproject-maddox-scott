@@ -1,12 +1,17 @@
+// Class used to return the most optimal moves.
 public class AI {
+    //Returns the computer's decision.
     static GameState returnMove(GameState state, int size) {
+        // On larger boards, the computer takes too long so the thinking is cut off early.
         if (size > 3) {
-            return (GameState)minValueABCutoff(state, Integer.MIN_VALUE, Integer.MAX_VALUE, 13 - size)[0];
+            return (GameState)minValueABCutoff(state, Integer.MIN_VALUE, Integer.MAX_VALUE, 12 - size)[0];
         } else {
             return (GameState)minValueAB(state, Integer.MIN_VALUE, Integer.MAX_VALUE)[0];
         }
     }
 
+    // returns two objects: 1: potential move which maximizes player 1's score. 2: the maximum score associated with that move.
+    // Alpha beta pruning used to reduce number of moves searched.
     static Object[] maxValueAB(GameState state, int alpha, int beta) {
         Object[] output = new Object[2];
         output[0] = null;
@@ -29,6 +34,7 @@ public class AI {
         return output;
     }
 
+    // returns two objects: 1: potential move which minimizes player 1's score. 2: the minimum score associated with that move.
     static Object[] minValueAB(GameState state, int alpha, int beta) {
         Object[] output = new Object[2];
         output[0] = null;
@@ -51,6 +57,7 @@ public class AI {
         return output;
     }
 
+    // same as the first two but gets cut off if taking too long.
     static Object[] maxValueABCutoff(GameState state, int alpha, int beta, int cutoff) {
         Object[] output = new Object[2];
         output[0] = null;
@@ -73,6 +80,7 @@ public class AI {
         return output;
     }
 
+    // same as the first two but gets cut off if taking too long.
     static Object[] minValueABCutoff(GameState state, int alpha, int beta, int cutoff) {
         Object[] output = new Object[2];
         output[0] = null;

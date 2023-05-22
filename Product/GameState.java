@@ -1,12 +1,17 @@
+// Class which represents the board itself, its condition, and its fullness.
 public class GameState {
+    // Width/Height of board.
     private int size;
+    // Board matrix, filled with either 'X', 'O', or '-' spaces.
     private char[][] board;
 
+    // constructor for child board.
     public GameState(int size, char[][] board) {
         this.size = size;
         this.board = board;
     }
 
+    // Constructor for empty board.
     public GameState(int size) {
         this.size = size;
         this.board = new char[size][size];
@@ -17,6 +22,7 @@ public class GameState {
         }
     }
 
+    // Checks for a winner or tie.
     public boolean isTerminalState() {
         // Check for winner.
         if (value() != 0) {
@@ -30,6 +36,7 @@ public class GameState {
         return true;
     }
 
+    // Returns who won, represented as 1 or -1.
     public int value() {
         // Check for p1 win.
         for (int i = 0; i < size; i++) {
@@ -116,6 +123,7 @@ public class GameState {
         return 0;
     }
 
+    // Returns estimation of who is currently winning, positive for p1, negative for AI.
     public int heuristicValue() {
         return XHeuristic() + OHeuristic();
     }
@@ -302,6 +310,7 @@ public class GameState {
         return moves;
     }
 
+    // Returns the future states of the board once empty spaces are filled.
     public GameState[] getMoves(char symbol) {
         GameState[] moves = new GameState[movesLeft()];
         int counter = 0;
@@ -323,6 +332,7 @@ public class GameState {
         return moves;
     }
 
+    // Visual representation of board.
     public void printBoard() {
         System.out.print(" ");
         for (int i = 0; i < size; i++) {
@@ -338,6 +348,7 @@ public class GameState {
         }
     }
 
+    //Getter methods.
     public int getSize() {
         return size;
     }

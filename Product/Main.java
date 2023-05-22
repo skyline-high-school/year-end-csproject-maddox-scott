@@ -1,16 +1,13 @@
 import java.util.Scanner;
 
+// Main driver class of the program, controls the game loop.
 public class Main {
     public static void main (String[] args) {
-
-        GameState bruh = new GameState(3); {
-            bruh.getMoves('X');
-        }
-
         Scanner input = new Scanner(System.in);
         GameState state;
         System.out.println("Wlecome to Tic-Tac-Toe!\n__________________________________________________\nPlayer 1: X\nAI: O\n__________________________________________________");
         int size;
+        // Loop to choose the board's size.
         while (true) {
             System.out.print("How many tiles wide should the board be?: ");
             if (input.hasNextInt()) {
@@ -27,10 +24,13 @@ public class Main {
                 input.nextLine();
             }
         }
+        // Game loop begins.
         state.printBoard();
         while (true) {
+            // Player 1 makes move.
             state = Player.returnMove(state, input);
             state.printBoard();
+            // checks for win.
             if (state.isTerminalState()) {
                 if (state.value() == 1) {
                     System.out.println("Player 1 wins!");
@@ -41,8 +41,10 @@ public class Main {
                 }
                 break; 
             }
+            // AI makes move.
             System.out.println("AI\'s Turn");
             state = AI.returnMove(state, size);
+            // Checks for win.
             state.printBoard();
             if (state.isTerminalState()) {
                 if (state.value() == 1) {
@@ -57,5 +59,6 @@ public class Main {
         }
         System.out.println("Thank you for playing. Better luck next time!");
         input.close();
+        // Game terminates.
     }
 }

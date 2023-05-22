@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
+// Class for handling user input.
 public class Player {
+    // Method for handling errors and exceptions during the player's turn.
     static GameState returnMove(GameState state, Scanner input) {
         System.out.println("Player 1\'s Turn");
         GameState move = null;
