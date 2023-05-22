@@ -116,6 +116,180 @@ public class GameState {
         return 0;
     }
 
+    public int heuristicValue() {
+        return XHeuristic() + OHeuristic();
+    }
+
+    public int XHeuristic() {
+        int value = 0;
+        // Rows
+        for (int i = 0; i < size; i++) {
+            boolean allX = true;
+            boolean useless = false;
+            int emptySpaces = 0;
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == '-') {
+                    allX = false;
+                    emptySpaces++;;
+                } else if (board[i][j] == 'O') {
+                    allX = false;
+                    useless = true;
+                    break;
+                }
+            }
+            if (allX) {
+                value += 100;
+            } else if (!useless) {
+                value += (size - emptySpaces) * 10;
+            } 
+        }
+        // Columns
+        for (int i = 0; i < size; i++) {
+            boolean allX = true;
+            boolean useless = false;
+            int emptySpaces = 0;
+            for (int j = 0; j < size; j++) {
+                if (board[j][i] == '-') {
+                    allX = false;
+                    emptySpaces++;
+                } else if (board[j][i] == 'O') {
+                    allX = false;
+                    useless = true;
+                    break;
+                }
+            }
+            if (allX) {
+                value += 100;
+            } else if (!useless) {
+                value += (size - emptySpaces) * 10;
+            } 
+        }
+        // Diagonals
+        boolean allX = true;
+        boolean useless = false;
+        int emptySpaces = 0;
+        for (int i = 0; i < size; i++) {
+            if (board[i][i] == '-') {
+                allX = false;
+                emptySpaces++;
+            } else if (board[i][i] == 'O') {
+                allX = false;
+                useless = true;
+                break;
+            }
+        }
+        if (allX) {
+            value += 100;
+        } else if (!useless) {
+            value += (size - emptySpaces) * 10;
+        } 
+        allX = true;
+        useless = false;
+        emptySpaces = 0;
+        for (int i = 0; i < size; i++) {
+            if (board[i][size - i - 1] == '-') {
+                allX = false;
+                emptySpaces++;
+            } else if (board[i][size - i - 1] == 'O') {
+                allX = false;
+                useless = true;
+                break;
+            }
+        }
+        if (allX) {
+            value += 100;
+        } else if (!useless) {
+            value += (size - emptySpaces) * 10;
+        } 
+        // Output.
+        return value;
+    }
+
+    public int OHeuristic() {
+        int value = 0;
+        // Rows
+        for (int i = 0; i < size; i++) {
+            boolean allO = true;
+            boolean useless = false;
+            int emptySpaces = 0;
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == '-') {
+                    allO = false;
+                    emptySpaces++;;
+                } else if (board[i][j] == 'X') {
+                    allO = false;
+                    useless = true;
+                    break;
+                }
+            }
+            if (allO) {
+                value -= 100;
+            } else if (!useless) {
+                value -= (size - emptySpaces) * 10;
+            } 
+        }
+        // Columns
+        for (int i = 0; i < size; i++) {
+            boolean allO = true;
+            boolean useless = false;
+            int emptySpaces = 0;
+            for (int j = 0; j < size; j++) {
+                if (board[j][i] == '-') {
+                    allO = false;
+                    emptySpaces++;
+                } else if (board[j][i] == 'X') {
+                    allO = false;
+                    useless = true;
+                    break;
+                }
+            }
+            if (allO) {
+                value -= 100;
+            } else if (!useless) {
+                value -= (size - emptySpaces) * 10;
+            } 
+        }
+        // Diagonals
+        boolean allO = true;
+        boolean useless = false;
+        int emptySpaces = 0;
+        for (int i = 0; i < size; i++) {
+            if (board[i][i] == '-') {
+                allO = false;
+                emptySpaces++;
+            } else if (board[i][i] == 'X') {
+                allO = false;
+                useless = true;
+                break;
+            }
+        }
+        if (allO) {
+            value -= 100;
+        } else if (!useless) {
+            value -= (size - emptySpaces) * 10;
+        } 
+        allO = true;
+        useless = false;
+        emptySpaces = 0;
+        for (int i = 0; i < size; i++) {
+            if (board[i][size - i - 1] == '-') {
+                allO = false;
+                emptySpaces++;
+            } else if (board[i][size - i - 1] == 'X') {
+                allO = false;
+                useless = true;
+                break;
+            }
+        }
+        if (allO) {
+            value -= 100;
+        } else if (!useless) {
+            value -= (size - emptySpaces) * 10;
+        } 
+        // Output.
+        return value;
+    }
+
     public int movesLeft() {
         int moves = 0;
         for (int i = 0; i < size; i++) {
@@ -150,7 +324,13 @@ public class GameState {
     }
 
     public void printBoard() {
+        System.out.print(" ");
         for (int i = 0; i < size; i++) {
+            System.out.print(" " + i + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < size; i++) {
+            System.out.print(i);
             for (int j = 0; j < size; j++) {
                 System.out.print(" " + board[i][j] + " ");
             }
